@@ -1,9 +1,6 @@
 package com.exe.applicationTask.persistence.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
@@ -27,4 +24,8 @@ public class Task {
     private Date dateTask;
 
     private String descriptionTask;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_application")
+    private Application application;
 }
