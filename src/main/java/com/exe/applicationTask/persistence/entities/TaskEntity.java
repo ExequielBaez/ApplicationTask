@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
-@Entity
+@Entity(name = "task")
 @Data
 
-public class Task {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +27,5 @@ public class Task {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_application")
-    private Application application;
+    private ApplicationEntity application;
 }

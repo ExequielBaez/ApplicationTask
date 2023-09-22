@@ -8,7 +8,7 @@ import java.sql.Date;
 @Entity(name = "application")
 @Data
 
-public class Application {
+public class ApplicationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +22,15 @@ public class Application {
 
     private String equipment;
 
+    private String descriptionApplication;
+
     private Date dateApplication;
 
     private String statusApplication;
 
-    private String descriptionApplication;
 
     @OneToOne(mappedBy = "application")
-    private Task task;
+    private TaskEntity task;
 
 
 
