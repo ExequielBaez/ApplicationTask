@@ -1,5 +1,6 @@
 package com.exe.applicationTask.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,14 +18,15 @@ public class TaskEntity {
 
     private String materials;
 
-    private String type;
+    private String descriptionTask;
 
-    private String statusTask;
+    private String type;
 
     private Date dateTask;
 
-    private String descriptionTask;
+    private String statusTask;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_application")
     private ApplicationEntity application;

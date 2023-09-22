@@ -1,5 +1,6 @@
 package com.exe.applicationTask.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,11 +29,7 @@ public class ApplicationEntity {
 
     private String statusApplication;
 
-
+    @JsonIgnore
     @OneToOne(mappedBy = "application")
     private TaskEntity task;
-
-
-
-
 }
