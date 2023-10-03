@@ -26,7 +26,7 @@ public class TaskEntity {
 
     private String statusTask;
 
-    @JsonIgnore
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_application")
     private ApplicationEntity application;
