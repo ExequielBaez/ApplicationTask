@@ -3,11 +3,13 @@ package com.exe.applicationTask.persistence.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 @Entity(name = "task")
-@Data
-
+@Getter
+@Setter
 public class TaskEntity {
 
     @Id
@@ -26,8 +28,23 @@ public class TaskEntity {
 
     private String statusTask;
 
-
+    //@JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_application")
     private ApplicationEntity application;
+
+
+    @Override
+    public String toString() {
+        return "TaskEntity{" +
+                "idTask=" + idTask +
+                ", technician='" + technician + '\'' +
+                ", materials='" + materials + '\'' +
+                ", descriptionTask='" + descriptionTask + '\'' +
+                ", type='" + type + '\'' +
+                ", dateTask=" + dateTask +
+                ", statusTask='" + statusTask + '\'' +
+                ", application=" + application +
+                '}';
+    }
 }

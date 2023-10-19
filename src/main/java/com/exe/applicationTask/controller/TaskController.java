@@ -44,9 +44,16 @@ public class TaskController {
         return ResponseEntity.ok(task);
     }
 
-    @PostMapping
-    public TaskEntity addTask(@RequestBody TaskEntity task){
+    /*@PostMapping
+    public TaskEntity addTask(@RequestBody TaskEntity task, @RequestParam("idApplication") Integer idApplication ){
         logger.info("Task to create: " +task);
+        return taskService.addTask(task, idApplication);
+
+    }*/
+
+    @PostMapping
+    public TaskEntity addTask(@RequestBody TaskEntity task) {
+        logger.info("Task to create: " + task);
         return taskService.addTask(task);
 
     }

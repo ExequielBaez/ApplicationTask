@@ -9,6 +9,8 @@ public interface TaskService {
 
     public TaskEntity getTask(int idTask);
 
+    //public TaskEntity addTask(TaskEntity taskEntity, Integer idApplication);
+
     public TaskEntity addTask(TaskEntity taskEntity);
 
     public void deleteTask(TaskEntity taskEntity);
