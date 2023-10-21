@@ -10,10 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/task")
@@ -25,16 +29,19 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    public List<TaskEntity> getAllApplications(){
+    public ResponseEntity<?> getAllApplications(){
 
         var tasks = taskService.getAllTasks();
 
         tasks.forEach(task -> logger.info(task.toString()));
+        //return ResponseEntity.ok(tasks);
+        Map<String, Object> response = Map.of("message", "Tasks List", "data", tasks);
 
-        return tasks;
+        // return ResponseEntity.ok(response)
+        return new ResponseEntity<>(response, OK);
     }
     @GetMapping("/{idTask}")
-    public ResponseEntity<TaskEntity> getApplication(@PathVariable int idTask){
+    public ResponseEntity<?> getApplication(@PathVariable int idTask){
 
         TaskEntity task = taskService.getTask(idTask);
 
@@ -52,10 +59,14 @@ public class TaskController {
     }*/
 
     @PostMapping
-    public TaskEntity addTask(@RequestBody TaskEntity task) {
+    public ResponseEntity<?> addTask(@RequestBody TaskEntity task) {
         logger.info("Task to create: " + task);
-        return taskService.addTask(task);
+        taskService.addTask(task);
 
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(task.getIdTask()).toUri();
+
+        return ResponseEntity.created(uri).body(task);
     }
 
     @DeleteMapping("/{idTask}")
